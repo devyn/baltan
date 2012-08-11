@@ -289,12 +289,63 @@ var g
       g.arc(4, 22, 1.5, 0, Math.PI*2);
       g.fill();
     },
+    '?': function () {
+      w = 8;
+      g.beginPath();
+      g.arc(4, 14, 1.5, 0, Math.PI*2);
+      g.arc(4, 18, 1.5, 0, Math.PI*2);
+      g.arc(4, 22, 1.5, 0, Math.PI*2);
+      g.fill();
+    },
+    '!': function () {
+      w = 8;
+      g.beginPath();
+      g.moveTo(2, 14);
+      g.lineTo(6, 14);
+      g.moveTo(2, 22);
+      g.lineTo(6, 22);
+      g.stroke();
+    },
+    '`': function () {
+      w = 8;
+      g.beginPath();
+      g.moveTo(2, 14);
+      g.lineTo(6, 14);
+      g.moveTo(2, 18);
+      g.moveTo(6, 18);
+      g.moveTo(2, 22);
+      g.lineTo(6, 22);
+      g.stroke();
+    },
     ',': function () {
       w = 8;
       g.beginPath();
       g.moveTo(2, 16);
       g.lineTo(6, 16);
       g.lineTo(6, 20);
+      g.stroke();
+    },
+    ':': function () {
+      w = 32;
+      g.beginPath();
+      g.moveTo(4, 18);
+      g.bezierCurveTo(12, 12, 20, 24, 28, 18);
+      g.stroke();
+    },
+    '“': function () {
+      w = 16;
+      g.beginPath();
+      g.moveTo(14, 2);
+      g.lineTo(8, 2);
+      g.lineTo(8, 8);
+      g.stroke();
+    },
+    '”': function () {
+      w = 16;
+      g.beginPath();
+      g.moveTo(2, 30);
+      g.lineTo(8, 30);
+      g.lineTo(8, 24);
       g.stroke();
     }
   };
@@ -367,13 +418,21 @@ function width(str) {
       case 'y':
       case 'w':
       case ' ':
+      case '“':
+      case '”':
         sw += 16;
         break;
       case 'z':
       case '-':
       case '.':
       case ',':
+      case '?':
+      case '!':
+      case '`':
         sw += 8;
+        break;
+      case ':':
+        sw += 32;
         break;
       case '\n':
         w = Math.max(sw, w);
