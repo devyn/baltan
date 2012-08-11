@@ -1,3 +1,5 @@
+// vim:et:ts=2:sw=2
+
 var g
   , p
   , w = 0
@@ -16,8 +18,8 @@ var g
       g.beginPath();
       g.moveTo(w/2-3, 9);
       g.lineTo(w/2+5, 5);
-      g.moveTo(w/2-5, 7);
-      g.lineTo(w/2+3, 3);
+      g.moveTo(w/2-5, 6);
+      g.lineTo(w/2+3, 2);
       g.stroke();
     },
     'e': function () {
@@ -32,8 +34,8 @@ var g
       g.beginPath();
       g.moveTo(w/2-5, 5);
       g.lineTo(w/2+3, 9);
-      g.moveTo(w/2-3, 3);
-      g.lineTo(w/2+5, 7);
+      g.moveTo(w/2-3, 2);
+      g.lineTo(w/2+5, 6);
       g.stroke();
     },
     'i': function () {
