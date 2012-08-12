@@ -313,7 +313,7 @@ var g
       g.moveTo(2, 14);
       g.lineTo(6, 14);
       g.moveTo(2, 18);
-      g.moveTo(6, 18);
+      g.lineTo(6, 18);
       g.moveTo(2, 22);
       g.lineTo(6, 22);
       g.stroke();
