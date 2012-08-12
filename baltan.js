@@ -247,10 +247,11 @@ var g
     'y': function () {
       w = 16;
       g.beginPath();
-      g.moveTo(4, 12);
-      g.arcTo(12, 12, 12, 24, 4);
-      //g.lineTo(12, 24);
-      g.lineTo(12, 25);
+      g.moveTo(2, 12);
+      g.arcTo(14, 12, 14, 24, 4);
+      g.lineTo(14, 24);
+      g.stroke();
+      g.beginPath();
       g.arc(8, 20, 4, 0, Math.PI*2);
       g.stroke();
     },
