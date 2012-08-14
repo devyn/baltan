@@ -71,6 +71,7 @@ var g
       g.beginPath();
       g.arc(w/2, 6, 1.5, 0, Math.PI*2);
       g.fill();
+      g.fill();
     },
     'u': function () {
       g.translate(-w, 0);
@@ -79,6 +80,7 @@ var g
         g.arc(w/2+4, 28, 1.5, 0, Math.PI*2);
       else
         g.arc(w/2, 28, 1.5, 0, Math.PI*2);
+      g.fill();
       g.fill();
     },
     'U': function () {
@@ -91,6 +93,7 @@ var g
         g.arc(w/2-3, 28, 1.5, 0, Math.PI*2);
         g.arc(w/2+3, 28, 1.5, 0, Math.PI*2);
       }
+      g.fill();
       g.fill();
     },
     'x': function () {
@@ -289,6 +292,7 @@ var g
       g.arc(4, 14, 1.5, 0, Math.PI*2);
       g.arc(4, 22, 1.5, 0, Math.PI*2);
       g.fill();
+      g.fill();
     },
     '?': function () {
       w = 8;
@@ -296,6 +300,7 @@ var g
       g.arc(4, 14, 1.5, 0, Math.PI*2);
       g.arc(4, 18, 1.5, 0, Math.PI*2);
       g.arc(4, 22, 1.5, 0, Math.PI*2);
+      g.fill();
       g.fill();
     },
     '!': function () {
