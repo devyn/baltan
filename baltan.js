@@ -255,7 +255,7 @@ var g
       g.lineTo(14, 24);
       g.stroke();
       g.beginPath();
-      g.arc(8, 20, 4, 0, Math.PI*2);
+      g.arc(7, 20, 4, 0, Math.PI*2);
       g.stroke();
     },
     'w': function () {
