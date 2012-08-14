@@ -286,6 +286,19 @@ var g
       g.lineTo(6, 32);
       g.stroke();
     },
+    '@a-e': function () {
+      var t = w;
+      drawers['-']();
+      g.translate(-8-w, 0);
+
+      g.beginPath();
+      g.moveTo(4, 8);
+      g.lineTo(12, 4);
+      g.lineTo(20, 8);
+      g.stroke();
+
+      w += t;
+    },
     '.': function () {
       w = 8;
       g.beginPath();
@@ -376,14 +389,23 @@ function draw() {
 
   g.save();
 
-	for (c in text) {
-		var d = drawers[text[c]];
+	for (var c = 0; c < text.length; c++) {
+    if (text.slice(c, c+3) === 'a-e') {
+      drawers['@a-e']();
 
-		if (typeof d === 'function') d();
+      g.translate(w, 0);
 
-    g.translate(w, 0);
+      p = 'e';
+      c += 2;
+    } else {
+		  var d = drawers[text[c]];
 
-    p = text[c];
+		  if (typeof d === 'function') d();
+
+      g.translate(w, 0);
+
+      p = text[c];
+    }
 	}
 
   g.restore();
