@@ -5,6 +5,7 @@ var g
   , w = 0
   , scale = 1
   , strokeWidth = 2
+  , english = false
   , drawers = {
     'a': function () {
       g.translate(-w, 0);
@@ -433,6 +434,7 @@ function width(str) {
       case 'i':
       case 'I':
       case 'o':
+      case 'O':
       case 'u':
       case 'U':
         break;
@@ -493,10 +495,91 @@ function initialize() {
   g.save();
 }
 
+var enBaltan = {};
+function enableEnglish() {
+  var req = new XMLHttpRequest;
+
+  req.onreadystatechange = function () {
+    if (req.readyState === 4) {
+      var res = req.responseText
+        , one = null
+        , two = null
+        , sta = 0
+        ;
+
+      for (var i = 0; i < res.length; i++) {
+        switch (sta) {
+          case 0:
+            switch (res[i]) {
+              case '\n':
+              case '\t':
+                break;
+              default:
+                one = res[i];
+                sta = 1;
+            }
+            break;
+          case 1:
+            switch (res[i]) {
+              case '\n':
+                one = null;
+                sta = 0;
+                break;
+              case '\t':
+                two = '';
+                sta = 2;
+                break;
+              default:
+                one += res[i];
+            }
+            break;
+          case 2:
+            switch (res[i]) {
+              case '\n':
+                enBaltan[one] = two;
+                one = null;
+                two = null;
+                sta = 0;
+                break;
+              default:
+                two += res[i];
+            }
+            break;
+          default:
+            sta = 0;
+            break;
+        }
+      }
+
+      english = true;
+      document.getElementById("text").disabled = true;
+      document.getElementById("engtext").style.display = '';
+      document.getElementById("engbutton").style.display = 'none';
+    }
+  };
+
+  req.open('GET', 'dict/en-baltan');
+  req.send(null);
+}
+
+function translateEnglish() {
+  document.getElementById("text").value =
+    document.getElementById("engtext").value.replace(/[A-Za-z']+/g, function (word) {
+      return enBaltan[word.toLowerCase()] || '???';
+    });
+  clear();
+  draw();
+}
+
 window.onload = function () {
   document.getElementById("text").onkeyup = function () {
     clear();
     draw();
+  };
+  document.getElementById("engtext").onkeyup = function () {
+    if (english) {
+      translateEnglish();
+    }
   };
   g = document.getElementById("out").getContext("2d");
   initialize();
