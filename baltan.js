@@ -73,6 +73,14 @@ var g
       g.fill();
       g.fill();
     },
+    'O': function () {
+      g.translate(-w, 0);
+      g.beginPath();
+      g.arc(w/2-3, 6, 1.5, 0, Math.PI*2);
+      g.arc(w/2+3, 6, 1.5, 0, Math.PI*2);
+      g.fill();
+      g.fill();
+    },
     'u': function () {
       g.translate(-w, 0);
       g.beginPath();
