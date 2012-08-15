@@ -1,38 +1,23 @@
-PHONES = {
-	'AA' => 'a',
-	'AE' => 'a-e',
-	'AH' => 'A',
-	'AO' => 'O',
-	'AW' => 'a-u',
-	'AY' => 'a-i',
+C = {
 	'B'  => 'zp',
 	'CH' => 'c',
 	'D'  => 'zt',
 	'DH' => 'zT',
-	'EH' => 'e',
-	'ER' => 'Er',
-	'EY' => 'e-i',
 	'F'  => 'f',
 	'G'  => 'zk',
 	'HH' => 'h',
-	'IH' => 'I',
-	'IY' => 'i',
 	'JH' => 'zc',
 	'K'  => 'k',
 	'L'  => 'l',
 	'M'  => 'm',
 	'N'  => 'n',
 	'NG' => 'N',
-	'OW' => 'o',
-	'OY' => 'o-i',
 	'P'  => 'p',
 	'R'  => 'r',
 	'S'  => 's',
 	'SH' => 'S',
 	'T'  => 't',
 	'TH' => 'T',
-	'UH' => 'U',
-	'UW' => 'u',
 	'V'  => 'zf',
 	'W'  => 'w',
 	'Y'  => 'y',
@@ -40,13 +25,49 @@ PHONES = {
 	'ZH' => 'zS'
 }
 
+V = {
+	'AA' => 'a',
+	'AE' => 'a-e',
+	'AH' => 'A',
+	'AO' => 'O',
+	'AW' => 'a-u',
+	'AY' => 'a-i',
+	'EH' => 'e',
+	'EY' => 'e-i',
+	'IH' => 'I',
+	'IY' => 'i',
+	'OW' => 'o',
+	'OY' => 'o-i',
+	'UH' => 'U',
+	'UW' => 'u'
+}
+
+R = {
+	'ER' => 'Er'
+}
+
 while line = gets
 	next if line =~ /^;;;/
 
 	if line =~ /^([^ ]+)  (.*)$/
-		name, phones = $1, $2
+		name, phones, out = $1, $2, ''
 
-		out = phones.split(' ').map { |ph| PHONES[ph.sub(/\d$/,'')] || raise('unknown phone: ' + ph) }.join('')
+		need_stop = true
+		phones.split(' ').each do |ph|
+			ph.sub!(/\d$/,'')
+			if r = R[ph]
+				out << (need_stop ? 'x' : '') << r
+				need_stop = false
+			elsif v = V[ph]
+				out << (need_stop ? 'x' : '') << v
+				need_stop = true
+			elsif c = C[ph]
+				out << c
+				need_stop = false
+			else
+				raise "unknown phoneme: #{ph}"
+			end
+		end
 
 		puts "#{name.gsub('-',' ').downcase}\t#{out}"
 	end
