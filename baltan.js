@@ -407,7 +407,6 @@ function draw() {
       p = 'e';
       c += 2;
     } else {
-      console.log(text[c]);
 		  var d = drawers[text[c]];
 
 		  if (typeof d === 'function') d();
