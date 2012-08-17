@@ -551,6 +551,7 @@ function enableEnglish() {
                 sta = 0;
                 break;
             }
+            break;
           default:
             one = null;
             two = null;
