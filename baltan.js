@@ -515,7 +515,7 @@ function enableEnglish() {
               case '\t':
                 break;
               default:
-                one = res[i];
+                one = i;
                 sta = 1;
             }
             break;
@@ -526,26 +526,34 @@ function enableEnglish() {
                 sta = 0;
                 break;
               case '\t':
-                two = '';
+                one = res.slice(one, i);
                 sta = 2;
                 break;
-              default:
-                one += res[i];
             }
             break;
           case 2:
             switch (res[i]) {
               case '\n':
-                enBaltan[one] = two;
                 one = null;
                 two = null;
                 sta = 0;
                 break;
               default:
-                two += res[i];
+                two = i;
+                sta = 3;
             }
             break;
+          case 3:
+            switch (res[i]) {
+              case '\n':
+                two = res.slice(two, i);
+                enBaltan[one] = two;
+                sta = 0;
+                break;
+            }
           default:
+            one = null;
+            two = null;
             sta = 0;
             break;
         }
