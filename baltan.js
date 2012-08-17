@@ -508,11 +508,12 @@ function enableEnglish() {
         ;
 
       for (var i = 0; i < res.length; i++) {
+        var cc = res.charCodeAt(i);
         switch (sta) {
           case 0:
-            switch (res[i]) {
-              case '\n':
-              case '\t':
+            switch (cc) {
+              case 10: // \n
+              case 9:  // \t
                 break;
               default:
                 one = i;
@@ -520,20 +521,20 @@ function enableEnglish() {
             }
             break;
           case 1:
-            switch (res[i]) {
-              case '\n':
+            switch (cc) {
+              case 10:
                 one = null;
                 sta = 0;
                 break;
-              case '\t':
+              case 9:
                 one = res.slice(one, i);
                 sta = 2;
                 break;
             }
             break;
           case 2:
-            switch (res[i]) {
-              case '\n':
+            switch (cc) {
+              case 10:
                 one = null;
                 two = null;
                 sta = 0;
@@ -544,8 +545,8 @@ function enableEnglish() {
             }
             break;
           case 3:
-            switch (res[i]) {
-              case '\n':
+            switch (cc) {
+              case 10:
                 two = res.slice(two, i);
                 enBaltan[one] = two;
                 sta = 0;
